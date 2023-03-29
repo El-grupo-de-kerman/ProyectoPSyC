@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author Aure
- *
- */
-module ProyectoPSyC {
-}
