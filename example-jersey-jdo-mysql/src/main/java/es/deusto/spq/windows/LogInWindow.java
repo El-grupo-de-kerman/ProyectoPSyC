@@ -1,4 +1,4 @@
-package windows;
+package es.deusto.spq.windows;
 
 import java.awt.EventQueue;
 
@@ -99,7 +99,7 @@ public class LogInWindow extends JFrame {
 		lblNewLabel_4_1_1.setBounds(10, 142, 207, 14);
 		panelRegister.add(lblNewLabel_4_1_1);
 		
-		textField_4 = new JTextField();
+		textField_4 = new JPasswordField();
 		textField_4.setColumns(10);
 		textField_4.setBounds(20, 165, 151, 20);
 		panelRegister.add(textField_4);
