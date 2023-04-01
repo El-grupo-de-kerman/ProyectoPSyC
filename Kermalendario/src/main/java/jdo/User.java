@@ -1,4 +1,4 @@
-package es.deusto.spq.server.jdo;
+package jdo;
 
 import java.util.Set;
 

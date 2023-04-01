@@ -1,4 +1,4 @@
-package es.deusto.spq.windows;
+package gui;
 
 import java.awt.EventQueue;
 
@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
-import es.deusto.spq.client.ExampleClient;
+import main.Main;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -48,7 +48,7 @@ public class LogInWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public LogInWindow(ExampleClient exampleClient) {
+	public LogInWindow(Main exampleClient) {
 		setTitle("LogIn Kermalendar");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 316);

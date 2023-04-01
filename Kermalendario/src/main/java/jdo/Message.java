@@ -1,4 +1,4 @@
-package es.deusto.spq.server.jdo;
+package jdo;
 
 import javax.jdo.annotations.PersistenceCapable;
 import java.util.Date;

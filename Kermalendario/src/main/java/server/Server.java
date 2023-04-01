@@ -1,4 +1,4 @@
-package es.deusto.spq.server;
+package server;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
@@ -6,11 +6,9 @@ import javax.jdo.Query;
 import javax.jdo.JDOHelper;
 import javax.jdo.Transaction;
 
-import es.deusto.spq.server.jdo.User;
-import es.deusto.spq.server.jdo.Message;
-import es.deusto.spq.pojo.DirectMessage;
-import es.deusto.spq.pojo.MessageData;
-import es.deusto.spq.pojo.UserData;
+import pojo.DirectMessage;
+import pojo.MessageData;
+import pojo.UserData;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -21,11 +19,15 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.apache.logging.log4j.Logger;
+
+import jdo.Message;
+import jdo.User;
+
 import org.apache.logging.log4j.LogManager;
 
-@Path("/resource")
+@Path("/server")
 @Produces(MediaType.APPLICATION_JSON)
-public class Resource {
+public class Server {
 
 	protected static final Logger logger = LogManager.getLogger();
 
@@ -33,7 +35,7 @@ public class Resource {
 	private PersistenceManager pm = null;
 	private Transaction tx = null;
 
-	public Resource() {
+	public Server() {
 		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 		this.pm = pmf.getPersistenceManager();
 		this.tx = pm.currentTransaction();

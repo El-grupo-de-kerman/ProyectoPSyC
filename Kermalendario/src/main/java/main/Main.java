@@ -1,4 +1,4 @@
-package es.deusto.spq.client;
+package main;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -9,15 +9,16 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import es.deusto.spq.pojo.DirectMessage;
-import es.deusto.spq.pojo.MessageData;
-import es.deusto.spq.pojo.UserData;
-import es.deusto.spq.windows.LogInWindow;
+import pojo.DirectMessage;
+import pojo.MessageData;
+import pojo.UserData;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class ExampleClient {
+import gui.LogInWindow;
+
+public class Main {
 
 	protected static final Logger logger = LogManager.getLogger();
 
@@ -28,9 +29,9 @@ public class ExampleClient {
 	private Client client;
 	private WebTarget webTarget;
 
-	public ExampleClient(String hostname, String port) {
+	public Main(String hostname, String port) {
 		client = ClientBuilder.newClient();
-		webTarget = client.target(String.format("http://%s:%s/rest/resource", hostname, port));
+		webTarget = client.target(String.format("http://%s:%s/rest/server", hostname, port));
 	}
 
 	public void registerUser(String name, String mail, String password) {
@@ -99,8 +100,8 @@ public class ExampleClient {
 		String hostname = args[0];
 		String port = args[1];
 
-		ExampleClient exampleClient = new ExampleClient(hostname, port);
-		new LogInWindow(exampleClient);
+		Main main = new Main(hostname, port);
+		new LogInWindow(main);
 		//exampleClient.registerUser(USER, PASSWORD);
 		//exampleClient.sayMessage(USER, PASSWORD, "This is a test!...");
 	}

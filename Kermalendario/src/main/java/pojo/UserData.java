@@ -1,4 +1,4 @@
-package es.deusto.spq.pojo;
+package pojo;
 
 public class UserData {
 
