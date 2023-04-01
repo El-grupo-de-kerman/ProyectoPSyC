@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.Dimension;
 
@@ -104,9 +106,16 @@ public class LogInWindow extends JFrame {
 		textField_4.setBounds(20, 165, 151, 20);
 		panelRegister.add(textField_4);
 		
-		JButton btnDone = new JButton("Done");
-		btnDone.setBounds(67, 207, 104, 23);
-		panelRegister.add(btnDone);
+		JButton btnDoneReg = new JButton("Done");
+		btnDoneReg.setBounds(67, 207, 104, 23);
+		panelRegister.add(btnDoneReg);
+		btnDoneReg.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
 		JPanel panelLogIn = new JPanel();
 		panelLogIn.setBackground(new Color(135, 206, 250));
@@ -137,8 +146,16 @@ public class LogInWindow extends JFrame {
 		lblNewLabel_3_1.setBounds(10, 124, 104, 14);
 		panelLogIn.add(lblNewLabel_3_1);
 		
-		JButton btnNewButton = new JButton("Done");
-		btnNewButton.setBounds(62, 207, 104, 23);
-		panelLogIn.add(btnNewButton);
+		JButton btnDoneLog = new JButton("Done");
+		btnDoneLog.setBounds(62, 207, 104, 23);
+		panelLogIn.add(btnDoneLog);
+		btnDoneLog.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 	}
 }
