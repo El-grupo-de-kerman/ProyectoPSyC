@@ -2,20 +2,29 @@ package es.deusto.spq.pojo;
 
 public class UserData {
 
-    private String login;
+    private String name;
+    private String mail;
     private String password;
 
     public UserData() {
         // required by serialization
     }
 
-    public String getLogin() {
-        return this.login;
+    public String getName() {
+        return this.name;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setName(String name) {
+        this.name = name;
     }
+    
+    public String getMail() {
+		return mail;
+	}
+    
+    public void setMail(String mail) {
+		this.mail = mail;
+	}
 
     public String getPassword() {
         return this.password;
@@ -26,6 +35,6 @@ public class UserData {
     }
 
     public String toString() {
-        return "[login=" + login + ", password=" + password + "]";
+        return "[Name: " + name + ", mail: " + mail + "]";
     }
 }

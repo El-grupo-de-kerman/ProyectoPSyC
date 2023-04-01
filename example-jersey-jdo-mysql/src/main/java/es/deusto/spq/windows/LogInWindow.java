@@ -6,6 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
+
+import es.deusto.spq.client.ExampleClient;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
@@ -28,28 +31,29 @@ public class LogInWindow extends JFrame {
 
 	/**
 	 * Launch the application.
-	 */
+	 *
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LogInWindow frame = new LogInWindow();
-					frame.setVisible(true);
+					new LogInWindow();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
+	*/
 
 	/**
 	 * Create the frame.
 	 */
-	public LogInWindow() {
+	public LogInWindow(ExampleClient exampleClient) {
 		setTitle("LogIn Kermalendar");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 316);
 		setMinimumSize(new Dimension(400, 300));
+		setVisible(true);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 128, 128));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -112,8 +116,8 @@ public class LogInWindow extends JFrame {
 		btnDoneReg.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				exampleClient.registerUser(textField_2.getText(), 
+						textField_3.getText(), textField_4.getText());
 			}
 		});
 		
@@ -153,8 +157,7 @@ public class LogInWindow extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				exampleClient.logUser(textField.getText(), textField_1.getText());
 			}
 		});
 	}

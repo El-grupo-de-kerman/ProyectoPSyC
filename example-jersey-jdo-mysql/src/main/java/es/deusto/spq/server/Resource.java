@@ -29,16 +29,17 @@ public class Resource {
 
 	protected static final Logger logger = LogManager.getLogger();
 
-	private int cont = 0;
-	private PersistenceManager pm=null;
-	private Transaction tx=null;
+	//private int cont = 0;
+	private PersistenceManager pm = null;
+	private Transaction tx = null;
 
 	public Resource() {
 		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 		this.pm = pmf.getPersistenceManager();
 		this.tx = pm.currentTransaction();
 	}
-
+	
+	/*
 	@POST
 	@Path("/sayMessage")
 	public Response sayMessage(DirectMessage directMessage) {
@@ -77,6 +78,7 @@ public class Resource {
 			return Response.status(Status.BAD_REQUEST).entity("Login details supplied for message delivery are not correct").build();
 		}
 	}
+	*/
 	
 	@POST
 	@Path("/register")
@@ -84,21 +86,19 @@ public class Resource {
 		try
         {	
             tx.begin();
-            logger.info("Checking whether the user already exits or not: '{}'", userData.getLogin());
+            logger.info("Checking whether the user already exits or not: '{}'", userData.getName());
 			User user = null;
 			try {
-				user = pm.getObjectById(User.class, userData.getLogin());
+				user = pm.getObjectById(User.class, userData.getName());
 			} catch (javax.jdo.JDOObjectNotFoundException jonfe) {
 				logger.info("Exception launched: {}", jonfe.getMessage());
 			}
 			logger.info("User: {}", user);
 			if (user != null) {
-				logger.info("Setting password user: {}", user);
-				user.setPassword(userData.getPassword());
-				logger.info("Password set user: {}", user);
+				return Response.serverError().build();
 			} else {
 				logger.info("Creating user: {}", user);
-				user = new User(userData.getLogin(), userData.getPassword());
+				user = new User(userData.getName(), userData.getMail(), userData.getPassword());
 				pm.makePersistent(user);					 
 				logger.info("User created: {}", user);
 			}
@@ -114,11 +114,47 @@ public class Resource {
       
 		}
 	}
+	
+	@POST
+	@Path("/login")
+	public Response loginUser(UserData userData) {
+		try
+        {	
+            tx.begin();
+            logger.info("Checking whether the user already exits or not: '{}'", userData.getName());
+			User user = null;
+			try {
+				user = pm.getObjectById(User.class, userData.getName());
+			} catch (javax.jdo.JDOObjectNotFoundException jonfe) {
+				logger.info("Exception launched: {}", jonfe.getMessage());
+			}
+			logger.info("User: {}", user);
+			if (user != null) {
+				if(!user.getPassword().equals(userData.getPassword())) {
+					return Response.serverError().build();
+				}
+			} else {
+				return Response.serverError().build();
+			}
+			tx.commit();
+			return Response.ok().build();
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+      
+		}
+	}
 
+	/*
 	@GET
 	@Path("/hello")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response sayHello() {
 		return Response.ok("Hello world!").build();
 	}
+	*/
 }
