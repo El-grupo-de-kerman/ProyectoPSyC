@@ -71,10 +71,10 @@ public class VentanaAgenda extends JFrame {
 		lMensajeInferior = new JLabel( " ", JLabel.CENTER );  // Tarea 4
 		lHoraInferior = new JLabel( " " );
 		try {  // Botones gráficos
-			bIzq = new JButton( new ImageIcon( VentanaAgenda.class.getResource("img/flechaIzqda.png").toURI().toURL() ) );
-			bDer = new JButton( new ImageIcon( VentanaAgenda.class.getResource("img/flechaDcha.png").toURI().toURL() ) );
-			bUsuario = new JButton( new ImageIcon( VentanaAgenda.class.getResource("img/user.png").toURI().toURL() ) );
-			bTrash = new JButton( new ImageIcon( VentanaAgenda.class.getResource("img/trash.png").toURI().toURL() ) );
+			bIzq = new JButton( new ImageIcon( VentanaAgenda.class.getResource("src/main/java/fuentes/img/flechaIzqda.png").toURI().toURL() ) );
+			bDer = new JButton( new ImageIcon( VentanaAgenda.class.getResource("src/main/java/fuentes/img/flechaDcha.png").toURI().toURL() ) );
+			bUsuario = new JButton( new ImageIcon( VentanaAgenda.class.getResource("src/main/java/fuentes/img/user.png").toURI().toURL() ) );
+			bTrash = new JButton( new ImageIcon( VentanaAgenda.class.getResource("src/main/java/fuentes/img/trash.png").toURI().toURL() ) );
 		} catch (Exception e1) {  // Si hay error, botones texto
 			bIzq = new JButton( "Antes" );
 			bDer = new JButton( "Después" );
