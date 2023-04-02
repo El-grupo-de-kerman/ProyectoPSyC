@@ -16,7 +16,6 @@ import pojo.UserData;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import fuentes.GestorAgenda;
 import gui.LogInWindow;
 
 public class Main {
@@ -63,8 +62,6 @@ public class Main {
 			logger.error("Error connecting with the server. Code: {}", response.getStatus());
 		} else {
 			logger.info("User correctly logged");
-			GestorAgenda mgt = new GestorAgenda();
-			mgt.lanza();
 		}
 	}
 	

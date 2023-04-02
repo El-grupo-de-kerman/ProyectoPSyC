@@ -1,5 +1,0 @@
-package fuentes;
-
-public enum EspecialidadMedica {
-	GENERAL, CARDIOVASCULAR, OTORRINO, RESPIRATORIO, DIGESTIVO, TRAUMA, INTERNA, DERMATOLOGIA;
-}
