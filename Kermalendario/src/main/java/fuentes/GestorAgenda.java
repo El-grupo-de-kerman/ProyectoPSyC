@@ -66,6 +66,7 @@ public class GestorAgenda {
 			ventana.setFechaInicial( new Date() );
 			ventana.setMensajeSuperior( "Pulsa los botones de flecha para mover días en la agenda, arrastra para cambiar de fecha, a la papelera para borrar, click para crear" );
 			ventana.setVisible( true );
+			ventana.repaint();
 			// Tarea 3
 			ventana.addWindowListener( new WindowAdapter() {
 				@Override

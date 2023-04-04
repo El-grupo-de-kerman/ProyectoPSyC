@@ -160,5 +160,6 @@ public class LogInWindow extends JFrame {
 				exampleClient.logUser(textField.getText(), textField_1.getText());
 			}
 		});
+		repaint();
 	}
 }

@@ -170,6 +170,7 @@ public class VentanaAgenda extends JFrame {
 				}
 			}
 		});
+		repaint();
 	}
 	
 	/** Añade el escuchador de ratón correspondiente al espacio de agenda
