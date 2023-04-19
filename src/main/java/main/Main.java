@@ -67,7 +67,7 @@ public class Main {
 			mgt.lanza();
 		}
 	}
-	
+	//Prueba de commit
 	/*
 	public void sayMessage(String login, String password, String message) {
 		WebTarget sayHelloWebTarget = webTarget.path("sayMessage");
