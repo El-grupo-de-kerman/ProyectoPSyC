@@ -23,4 +23,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn --batch-mode --update-snapshots package org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=xabism97_ci-example
+        run: mvn --batch-mode --update-snapshots package org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=NikoPM_ProyectoPSyC
