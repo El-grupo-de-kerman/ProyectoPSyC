@@ -1,0 +1,14 @@
+package test;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class LogInWindowTest {
+
+	@Test
+	public void testLogInWindow() {
+		fail("Not yet implemented");
+	}
+
+}
