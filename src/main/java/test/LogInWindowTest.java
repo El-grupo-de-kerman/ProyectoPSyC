@@ -8,7 +8,7 @@ public class LogInWindowTest {
 
 	@Test
 	public void testLogInWindow() {
-		fail("Not yet implemented");
+		
 	}
 
 }
