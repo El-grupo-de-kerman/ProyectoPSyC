@@ -14,7 +14,7 @@ public class CitaMedica extends Cita {
 	
 	//================= Parte static
 	private static final long serialVersionUID = 1L; // Versión para la serialización
-	protected static final Color COLOR_FONDO = new Color( 0, 255, 0, 53 ); // Color verde traslúcido para fondo
+	public static final Color COLOR_FONDO = new Color( 0, 255, 0, 53 ); // Color verde traslúcido para fondo
 	
 	//================= Parte no static
 
