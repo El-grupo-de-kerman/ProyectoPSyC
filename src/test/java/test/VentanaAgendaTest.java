@@ -2,88 +2,143 @@ package test;
 
 import static org.junit.Assert.*;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
+import javax.swing.JOptionPane;
+
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import fuentes.CitaMedica;
+import fuentes.EspacioAgenda;
+import fuentes.EspecialidadMedica;
+import fuentes.GestorAgenda;
+import fuentes.VentanaAgenda;
 
 public class VentanaAgendaTest {
 
-	@Test
-	public void testVentanaAgenda() {
-		fail("Not yet implemented");
+	
+	private GestorAgenda gestor;
+	private static final int NUM_DIAS = 7;
+	private VentanaAgenda ventana; 
+	private EspacioAgenda espacioAgenda;
+	
+	
+	
+	
+	@Before
+	public void setUp() {
+	 MockitoAnnotations.openMocks(this);
+	
+	 gestor = new GestorAgenda();
+ 	 ventana = new VentanaAgenda(400,400, gestor);
+ 	  // Creamos un objeto Date para la fecha
+     Date fecha = new Date(646464644);
+     
+     // Duración de 60 minutos
+     int duracion = 60;
+     espacioAgenda = EspacioAgenda.crearNuevoEspacio("Cita médica", ventana, fecha, duracion);
+     gestor.anyadirEspacio(espacioAgenda);
+	
+
 	}
+
 
 	@Test
 	public void testAnyadirGestorRaton() {
-		fail("Not yet implemented");
+		 
+		    ventana.anyadirGestorRaton(espacioAgenda);
+		    assertNotNull(ventana.getPanel().getMouseListeners()); // Comprobamos que se ha añadido un gestor de ratón al panel
 	}
 
 	@Test
 	public void testRecalculaPosiciones() {
-		fail("Not yet implemented");
+		 ventana.recalculaPosiciones();
+	
 	}
 
 	@Test
 	public void testGetFechaInicial() {
-		fail("Not yet implemented");
+		
+		Date fecha = Date.valueOf(LocalDate.now().toString());
+		ventana.setFechaInicial(fecha);
+		assertEquals(fecha, ventana.getFechaInicial());
+	
 	}
 
 	@Test
 	public void testGetPanel() {
-		fail("Not yet implemented");
+		assertNotNull(ventana.getPanel());
 	}
 
 	@Test
 	public void testGetBotonTrash() {
-		fail("Not yet implemented");
+		assertNotNull(ventana.getBotonTrash());
 	}
 
 	@Test
 	public void testGetFechaFinal() {
-		fail("Not yet implemented");
+		Date fecha = Date.valueOf(LocalDate.now().toString());
+		ventana.setFechaInicial(fecha);
+		System.out.println(ventana.getFechaFinal());
+		Date expected = new Date( ventana.getFechaInicial().getTime() + 24*3600000L * NUM_DIAS - 60000L );
+		assertEquals(expected, ventana.getFechaFinal());
 	}
 
 	@Test
 	public void testSetFechaInicial() {
-		fail("Not yet implemented");
+		Date fecha = Date.valueOf(LocalDate.now().toString());
+		ventana.setFechaInicial(fecha);
+		assertEquals(fecha, ventana.getFechaInicial());
 	}
 
 	@Test
 	public void testMueveDias() {
-		fail("Not yet implemented");
+		Date fecha = Date.valueOf(LocalDate.now().toString());
+		ventana.setFechaInicial(fecha);
+		Date fecha2 = new Date( ventana.getFechaInicial().getTime() + 7 * 24*3600000L );
+		ventana.mueveDias(7);
+		assertEquals(fecha2, ventana.getFechaInicial());
+		
 	}
 
 	@Test
 	public void testSetMensajeSuperior() {
-		fail("Not yet implemented");
+		 ventana.setMensajeSuperior("Prueba");
+
 	}
 
 	@Test
 	public void testCerrar() {
-		fail("Not yet implemented");
+		ventana.cerrar();
 	}
 
 	@Test
 	public void testGetFechaDePunto() {
-		fail("Not yet implemented");
+	
+        int x = 100;
+        int y = 200;
+        
+      
+        java.util.Date fecha = ventana.getFechaDePunto(x, y);
+
 	}
 
-	@Test
-	public void testGetXFecha() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetYFecha() {
-		fail("Not yet implemented");
-	}
+	
 
 	@Test
 	public void testGetAlturaPixels() {
-		fail("Not yet implemented");
+	
+		assertEquals(0, ventana.getAlturaPixels(60));
 	}
 
 	@Test
 	public void testGetAnchoColumna() {
-		fail("Not yet implemented");
+		
+		assertEquals(0, ventana.getAnchoColumna());
 	}
 
 }
