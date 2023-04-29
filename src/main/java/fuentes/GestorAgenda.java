@@ -203,7 +203,7 @@ public class GestorAgenda {
 		}
 	}
 	
-	private void recolocaEspacioEnSuOrigen( EspacioAgenda espacio ) {
+	public void recolocaEspacioEnSuOrigen( EspacioAgenda espacio ) {
 		// Tarea 5 - opción A - hilo de animación
 		// Posible inicialización de variables para los movimimentos a hacer en la animación
 		// double x = espacio.getX();  // x actual
@@ -236,7 +236,7 @@ public class GestorAgenda {
 	}
 	
 	// Reinicia la ventana y panel visual de la agenda (listaAgenda) actual
-	private void reiniciaVentanaDeAgenda() {
+	public void reiniciaVentanaDeAgenda() {
 		for (EspacioAgenda espacio : listaAgenda) {
 			espacio.setVentana( ventana );
 			ventana.getPanel().add( espacio );
