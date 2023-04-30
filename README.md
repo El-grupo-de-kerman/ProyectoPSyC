@@ -5,9 +5,21 @@ Run the following command to build everything and enhance the DB classes:
 
       mvn clean compile
 
-Make sure that the database was correctly configured. Use the contents of the file *create-message.sql* to create the database and grant privileges. For example,
+OR 
+
+Run the following command to compile all classes and launch the unit tests:
+
+      mvn test
+
+THEN:
+
+Make sure that the database was correctly configured. Use the contents of the file *kermalendarioBD.sql* to create the database and grant privileges. For example,
 
       mysql –uroot -p < sql/kermalendarioBD.sql
+
+Execute the following command to enhance the database classes.
+
+      mvn datanucleus:enhance
 
 Run the following command to create database schema for this sample.
 
