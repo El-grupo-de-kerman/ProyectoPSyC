@@ -12,9 +12,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import fuentes.CitaMedica;
 import fuentes.EspacioAgenda;
-import fuentes.EspecialidadMedica;
 import fuentes.GestorAgenda;
 import fuentes.VentanaAgenda;
 
@@ -40,7 +38,7 @@ public class VentanaAgendaTest {
      
      // Duración de 60 minutos
      int duracion = 60;
-     espacioAgenda = EspacioAgenda.crearNuevoEspacio("Cita médica", ventana, fecha, duracion);
+     espacioAgenda = EspacioAgenda.crearNuevoEspacio(ventana, fecha, duracion);
      gestor.anyadirEspacio(espacioAgenda);
 	
 

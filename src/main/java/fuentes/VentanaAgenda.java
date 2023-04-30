@@ -31,8 +31,8 @@ public class VentanaAgenda extends JFrame {
 	
 	private JButton bTrash;         
 	private JButton bIzq;          
-	private JButton bDer;           
-	private JButton bUsuario;     
+	private JButton bDer;  
+	private JButton bUser;
 	private JPanel pAgenda;       
 	private JLabel lMensaje;        
 	private int inicioXAgenda;     
@@ -40,7 +40,7 @@ public class VentanaAgenda extends JFrame {
 	private int anchoColumna;       
 	private int altoHora;          
 	private Date fechaInicial;      
-	private GestorAgenda gestor;    
+	private GestorAgenda gestor;  
 	
 	
 	private JLabel lMensajeInferior;
@@ -69,15 +69,15 @@ public class VentanaAgenda extends JFrame {
 		lMensajeInferior = new JLabel( " ", JLabel.CENTER );  // Tarea 4
 		lHoraInferior = new JLabel( " " );
 		try {  // Botones gráficos
-			bIzq = new JButton( new ImageIcon( VentanaAgenda.class.getResource("src/main/java/fuentes/img/flechaIzqda.png").toURI().toURL() ) );
-			bDer = new JButton( new ImageIcon( VentanaAgenda.class.getResource("src/main/java/fuentes/img/flechaDcha.png").toURI().toURL() ) );
-			bUsuario = new JButton( new ImageIcon( VentanaAgenda.class.getResource("src/main/java/fuentes/img/user.png").toURI().toURL() ) );
-			bTrash = new JButton( new ImageIcon( VentanaAgenda.class.getResource("src/main/java/fuentes/img/trash.png").toURI().toURL() ) );
+			bIzq = new JButton( new ImageIcon("src/main/java/fuentes/img/flechaIzqda.png" ));
+			bDer = new JButton( new ImageIcon("src/main/java/fuentes/img/flechaDcha.png"));
+			bTrash = new JButton( new ImageIcon("src/main/java/fuentes/img/trash.png"));
+			bUser = new JButton( new ImageIcon("src/main/java/fuentes/img/user.png"));
 		} catch (Exception e1) {  // Si hay error, botones texto
 			bIzq = new JButton( "Antes" );
 			bDer = new JButton( "Después" );
-			bUsuario = new JButton( "Usuario" );
 			bTrash = new JButton( "Borrar" );
+			bUser = new JButton("Eventos");
 		}
 		
 		lMensaje.setFont( TIPO_MENSAJE );
@@ -86,7 +86,7 @@ public class VentanaAgenda extends JFrame {
 	
 		pIzquierda.add( bIzq );
 		pIzquierda.add( bDer );
-		pIzquierda.add( bUsuario );
+		pIzquierda.add(bUser);
 		pIzquierda.add( bTrash );
 		getContentPane().add( pIzquierda, BorderLayout.WEST );
 		pSuperior.add( lMensaje );
@@ -134,16 +134,20 @@ public class VentanaAgenda extends JFrame {
 				repaint();
 			}
 		});
+		bUser.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Object entrada = JOptionPane.showInputDialog( VentanaAgenda.this, "Eventos:", "Mis Eventos", JOptionPane.INFORMATION_MESSAGE, null, gestor.getListaAgenda().toArray(), null );
+				
+				if(entrada != null) {
+					gestor.espacioSeleccionado(String.valueOf(entrada));
+				}
+			}
+		});
 		bTrash.addActionListener( new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				gestor.borrarAgendaActual( true );
-			}
-		});
-		bUsuario.addActionListener( new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				gestor.login();
 			}
 		});
 	

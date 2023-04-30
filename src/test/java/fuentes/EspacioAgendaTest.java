@@ -2,6 +2,7 @@ package fuentes;
 
 import static org.junit.Assert.*;
 
+
 import java.awt.Color;
 import java.sql.Date;
 import java.time.LocalDateTime;
@@ -11,21 +12,14 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import fuentes.Cita;
-import fuentes.CitaMedica;
 import fuentes.EspacioAgenda;
-import fuentes.EspecialidadMedica;
 import fuentes.GestorAgenda;
-import fuentes.Tarea;
 import fuentes.VentanaAgenda;
 
 public class EspacioAgendaTest {
 
 	private GestorAgenda gestor;
 	private VentanaAgenda ventana;
-	private EspacioAgenda espacioTarea;
-	private EspacioAgenda espacioCita;
-	private EspacioAgenda espacioCitaMedica;
 	private EspacioAgenda espacioAgenda;
 
 	@Mock
@@ -51,30 +45,15 @@ public class EspacioAgendaTest {
 	    int duracion = 60;
 	    
 	    // Creamos un espacio de tipo "Tarea"
-	 espacioTarea = EspacioAgenda.crearNuevoEspacio("Tarea", ventana, fecha, duracion);
-	   espacioCita = EspacioAgenda.crearNuevoEspacio("Cita", ventana, fecha, duracion);
-	   espacioCitaMedica = EspacioAgenda.crearNuevoEspacio("Cita médica", ventana, fecha, duracion);
-	   espacioAgenda = EspacioAgenda.crearNuevoEspacio("Cita médica", ventana, fecha, duracion);
+	espacioAgenda = EspacioAgenda.crearNuevoEspacio(ventana, fecha, duracion);
 		 
 		  }
 
 	@Test
 	public void testCrearNuevoEspacio() {
 		
-	    assertNotNull(espacioTarea);
-	    assertTrue(espacioTarea instanceof Tarea);
-	    
-	    // Creamos un espacio de tipo "Cita"
-	  
-	    assertNotNull(espacioCita);
-	    assertTrue(espacioCita instanceof Cita);
-	    
-	    // Creamos un espacio de tipo "Cita médica"
-	   
-	    assertNotNull(espacioCitaMedica);
-	    assertTrue(espacioCitaMedica instanceof CitaMedica);
-	    assertEquals(EspecialidadMedica.GENERAL, ((CitaMedica)espacioCitaMedica).getEspecialidad());
-	    
+	    assertNotNull(espacioAgenda);
+	    assertTrue(espacioAgenda instanceof EspacioAgenda);
 	
 	}
 
@@ -82,65 +61,65 @@ public class EspacioAgendaTest {
 	@Test
 	public void testGetVentana() {
 		
-		assertEquals(ventana, espacioTarea.getVentana());
+		assertEquals(ventana, espacioAgenda.getVentana());
 	}
 
 	@Test
 	public void testSetVentana() {
-		espacioTarea.setVentana(ventana);
-		assertEquals(ventana, espacioTarea.getVentana());
+		espacioAgenda.setVentana(ventana);
+		assertEquals(ventana, espacioAgenda.getVentana());
 	
 	}
 
 	@Test
 	public void testSetX() {
-		espacioTarea.setX(40);
-		assertEquals(40, espacioTarea.getX());
+		espacioAgenda.setX(40);
+		assertEquals(40, espacioAgenda.getX());
 
 	}
 
 	@Test
 	public void testSetY() {
-		espacioTarea.setY(40);
-		assertEquals(40, espacioTarea.getY());
+		espacioAgenda.setY(40);
+		assertEquals(40, espacioAgenda.getY());
 	}
 
 	@Test
 	public void testGetFechaHora() {
 	
-        espacioTarea.setFechaHora(fechaHoraMock);
-        assertEquals(fechaHoraMock, espacioTarea.getFechaHora());
+		espacioAgenda.setFechaHora(fechaHoraMock);
+        assertEquals(fechaHoraMock, espacioAgenda.getFechaHora());
 
 	}
 
 	@Test
 	public void testSetFechaHora() {
-		 espacioTarea.setFechaHora(fechaHoraMock);
-	     assertEquals(fechaHoraMock, espacioTarea.getFechaHora());
+		espacioAgenda.setFechaHora(fechaHoraMock);
+	     assertEquals(fechaHoraMock, espacioAgenda.getFechaHora());
 	}
 
 	@Test
 	public void testGetDuracionMins() {
-		assertEquals(60, espacioTarea.getDuracionMins());
+		assertEquals(60, espacioAgenda.getDuracionMins());
 	}
 
 	@Test
 	public void testSetDuracionMins() {
-		espacioTarea.setDuracionMins(50);
-		assertEquals(50, espacioTarea.getDuracionMins());
+		espacioAgenda.setDuracionMins(50);
+		assertEquals(50, espacioAgenda.getDuracionMins());
 	
 	}
 
 	@Test
 	public void testGetColorFondo() {
-		 espacioTarea.setColorFondo(colorFondoMock);
-	     assertEquals(colorFondoMock, espacioTarea.getColorFondo());
+		espacioAgenda.setColorFondo(colorFondoMock);
+	     assertEquals(colorFondoMock, espacioAgenda.getColorFondo());
 	}
 
 	@Test
 	public void testSetColorFondo() {
-		espacioTarea.setColorFondo(colorFondoMock);
-	     assertEquals(colorFondoMock, espacioTarea.getColorFondo());
+		espacioAgenda.setColorFondo(colorFondoMock);
+	     assertEquals(colorFondoMock, espacioAgenda.getColorFondo());
 
 	}
 
@@ -189,7 +168,7 @@ public class EspacioAgendaTest {
 
 	@Test
 	public void testEqualsObject() {
-		assertEquals(espacioAgenda, espacioCitaMedica);
+		assertEquals(espacioAgenda, espacioAgenda);
 	}
 
 	@Test
@@ -201,9 +180,9 @@ public class EspacioAgendaTest {
 	@Test
 	public void testMover() {
 		
-		 espacioTarea.mover(5, 5);
-		 assertEquals(5, espacioTarea.getX());
-		 assertEquals(5, espacioTarea.getY());
+		espacioAgenda.mover(5, 5);
+		 assertEquals(5, espacioAgenda.getX());
+		 assertEquals(5, espacioAgenda.getY());
 		
 	}
 

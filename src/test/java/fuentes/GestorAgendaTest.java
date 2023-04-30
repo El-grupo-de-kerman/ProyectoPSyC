@@ -21,9 +21,6 @@ public class GestorAgendaTest {
 
 	private GestorAgenda gestor;
 	private VentanaAgenda ventana;
-	private EspacioAgenda espacioTarea;
-	private EspacioAgenda espacioCita;
-	private EspacioAgenda espacioCitaMedica;
 	private EspacioAgenda espacioAgenda;
 	private Date fecha;
 
@@ -50,10 +47,7 @@ public class GestorAgendaTest {
 	    int duracion = 60;
 	    
 	    // Creamos un espacio de tipo "Tarea"
-	 espacioTarea = EspacioAgenda.crearNuevoEspacio("Tarea", ventana, fecha, duracion);
-	   espacioCita = EspacioAgenda.crearNuevoEspacio("Cita", ventana, fecha, duracion);
-	   espacioCitaMedica = EspacioAgenda.crearNuevoEspacio("Cita médica", ventana, fecha, duracion);
-	   espacioAgenda = EspacioAgenda.crearNuevoEspacio("Cita médica", ventana, fecha, duracion);
+	   espacioAgenda = EspacioAgenda.crearNuevoEspacio(ventana, fecha, duracion);
 		 
 		  }
 
@@ -104,6 +98,11 @@ public class GestorAgendaTest {
 		gestor.borrarAgendaActual(false);
 		gestor.borrarAgendaActual(true);
 		
+	}
+	
+	@Test
+	public void TestEspacioSeleccionado() {
+		gestor.espacioSeleccionado("a");
 	}
 
 

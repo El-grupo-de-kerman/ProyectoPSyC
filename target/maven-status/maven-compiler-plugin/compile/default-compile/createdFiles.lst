@@ -1,16 +1,12 @@
-fuentes\TipoTarea.class
 fuentes\GestorAgenda$2.class
-fuentes\Tarea.class
 fuentes\VentanaAgenda$3.class
 gui\LogInWindow$2.class
 main\Main.class
 fuentes\VentanaAgenda$8.class
-fuentes\CitaMedica.class
 fuentes\VentanaAgenda$4.class
 fuentes\GestorAgenda.class
 pojo\UserData.class
 fuentes\EspacioAgenda.class
-fuentes\Cita.class
 fuentes\VentanaAgenda$6.class
 fuentes\VentanaAgenda$1.class
 server\Server.class
@@ -27,4 +23,3 @@ fuentes\Editable.class
 gui\LogInWindow.class
 fuentes\VentanaAgenda$PanelGrafico.class
 gui\LogInWindow$1.class
-fuentes\EspecialidadMedica.class

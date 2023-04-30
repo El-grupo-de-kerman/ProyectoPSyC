@@ -1,32 +1,33 @@
 package fuentes;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /** Clase para generar espacios en la agenda. Cada espacio se asigna a una fecha, hora y duración
  * @author andoni.eguiluz @ ingenieria.deusto.es
  */
-public abstract class EspacioAgenda extends JLabel implements Movible, Serializable {
+public class EspacioAgenda extends JLabel implements Movible, Serializable, Editable {
 	
 	//================= Parte static
 	private static final long serialVersionUID = 1L; // Versión para la serialización
 	
-	protected static final Color COLOR_FONDO = new Color( 240, 240, 240 );  // Gris clarito - Color de fondo por defecto
+	protected static final Color COLOR_FONDO = Color.BLUE;  // Azul - Color de fondo por defecto
 	protected static final Color COLOR_BORDE = Color.MAGENTA; // Color visual de la caja del espacio
 	protected static final float GROSOR = 1.0f;  // Grosor visual del borde del espacio
+	protected static final Color COLOR_TEXTO = Color.BLACK;   // Color visual del texto interior de la caja
+	protected static final Font TIPO_TEXTO = new Font( "Arial", Font.PLAIN, 12 ); // Tipografía de los textos que se muestran
 	
 	protected static final SimpleDateFormat DMY_HM = new SimpleDateFormat( "dd/MM/yyyy hh:mm" );
 	
 	
 	/** Tipos de espacios que pueden crearse  (corresponden a clases hijas de EspacioAgenda)
 	 */
-	public static String[] TIPOS_DE_ESPACIOS = { "Tarea", "Cita"
-		// Tarea 1
-		, "Cita médica"
-	};
+	public static String[] TIPOS_DE_COLOR = { "Azul", "Rojo", "Verde", "Blanco", "Amarillo", "Naranja", "Morado"};
 	
 	/** Constructor indirecto de espacio de agenda
 	 * @param tipoEspacio	Tipo de espacio. Uno de los valores de {@link #TIPOS_DE_ESPACIOS}
@@ -36,20 +37,9 @@ public abstract class EspacioAgenda extends JLabel implements Movible, Serializa
 	 * @return
 	 * @throws NullPointerException	Si el tipo de espacio no es uno de los valores correctos
 	 */
-	public static EspacioAgenda crearNuevoEspacio( String tipoEspacio, VentanaAgenda ventana, Date fecha, int duracion ) throws NullPointerException {
-		EspacioAgenda ret = null;
-		switch (tipoEspacio) {
-			case "Tarea":
-				ret = new Tarea(ventana, fecha, duracion);
-				break;
-			case "Cita":
-				ret = new Cita(ventana, fecha, duracion);
-				break;
-			// Tarea 1
-			case "Cita médica":
-				ret = new CitaMedica(ventana, fecha, duracion, EspecialidadMedica.GENERAL );
-				break;
-		}
+	public static EspacioAgenda crearNuevoEspacio(VentanaAgenda ventana, Date fecha, int duracion ) throws NullPointerException {
+		EspacioAgenda ret = new EspacioAgenda(ventana, fecha, duracion);
+		
 		return ret;
 	}
 	
@@ -139,13 +129,16 @@ public abstract class EspacioAgenda extends JLabel implements Movible, Serializa
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
-		setText( toString() ); // Cambia el texto visual
+		setText( descripcion ); // Cambia el texto visual
 	}
 
 	/** Recalcula la posición en la ventana de este slot en función de su fecha y duración
 	 */
 	public void recalculaPosicion() {
 		setLocation( ventana.getXFecha(fechaHora), ventana.getYFecha(fechaHora) );
+		if(ventana.getFechaInicial().after(fechaHora) || ventana.getFechaFinal().before(fechaHora)) {
+			setLocation(-1000, -1000);
+		}
 		setSize( ventana.getAnchoColumna(), ventana.getAlturaPixels( duracionMins ) );
 	}
 	
@@ -174,13 +167,41 @@ public abstract class EspacioAgenda extends JLabel implements Movible, Serializa
 	
 	@Override
 	public String toString() {
-		return descripcion;
+		return "Evento: " + descripcion + ", Fecha: " + fechaHora.toString() + ", Duracion(Mins.): " + duracionMins;
 	}
 
 	public void mover( int x, int y ) {
 		setLocation( x, y );
 //		setX( x );
 //		setY( y );
+	}
+	
+	@Override
+	public void editar() {
+		String entrada = JOptionPane.showInputDialog( ventana, "Edita o confirma la descripción del recordatorio:", descripcion );
+		if (entrada!=null) {
+			setDescripcion( entrada );
+		}
+		
+		Object obj = JOptionPane.showInputDialog( ventana, "Elige color a generar:", "Creación", JOptionPane.INFORMATION_MESSAGE, null, EspacioAgenda.TIPOS_DE_COLOR, "Azul" );
+		String tipoColor = String.valueOf(obj);
+		if(tipoColor.equals("Azul") ) {
+			setColorFondo(new Color(0, 0, 255, 53));
+		} else if(tipoColor.equals("Rojo") ) {
+			setColorFondo(new Color(255, 0, 0, 53));
+		} else if(tipoColor.equals("Verde") ) {
+			setColorFondo(new Color(0, 255, 0, 53));
+		} else if(tipoColor.equals("Blanco") ) {
+			setColorFondo(new Color(233, 233, 233, 53));
+		} else if(tipoColor.equals("Amarillo") ) {
+			setColorFondo(new Color(255, 255, 0, 53));
+		} else if(tipoColor.equals("Naranja") ) {
+			setColorFondo(new Color(255, 128, 0, 53));
+		} else if(tipoColor.equals("Morado") ) {
+			setColorFondo(new Color(255, 0, 255, 53));
+		} else {
+			setColorFondo(new Color(0, 102, 204, 53));
+		}
 	}
 	
 }

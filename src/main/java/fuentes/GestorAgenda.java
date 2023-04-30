@@ -80,8 +80,9 @@ public class GestorAgenda {
 	/** Proceso de login - pide el nombre de usuario
 	 */
 	public void login() {
-		nick = JOptionPane.showInputDialog( "Bienvenido/a al gestor de agenda. ¿Nombre de usuario?" );
+		//nick = JOptionPane.showInputDialog( "Bienvenido/a al gestor de agenda. ¿Nombre de usuario?" );
 		// Tarea 2
+		nick = "a";
 		borrarAgendaActual( false );  // Borra agenda sin pedir confirmación para cargar o crear la agenda nueva
 		if (mapaAgendas.containsKey(nick)) {  // Usuario ya existente - carga su agenda en la ventana
 			listaAgenda = mapaAgendas.get(nick);
@@ -90,13 +91,16 @@ public class GestorAgenda {
 			mapaAgendas.put( nick, listaAgenda );
 		}
 		// Segunda parte
+		/*
 		System.out.println( "Usuarios actualmente en agenda:" );
 		for (String usu : mapaAgendas.keySet()) {
 			ArrayList<EspacioAgenda> l = mapaAgendas.get(usu);
 			System.out.println( usu + " - " + l.size() + " espacios: " + l );
 		}
+		*/
 	}
 	
+	/*
 	// Proceso de inicializar datos de la ventana de trabajo
 	private void initDatos() {
 		// Tarea 3
@@ -124,6 +128,7 @@ public class GestorAgenda {
 			anyadirEspacio( citaM );
 		}
 	}
+	*/
 	
 	/** Añade un espacio a la agenda
 	 * @param espacio	Espacio a añadir
@@ -154,22 +159,21 @@ public class GestorAgenda {
 	public void crearEspacioInteractivo( Date fecha ) {
 		if (fecha != null) {  // Se puede crear
 			// 1.- Elegir qué espacio se genera
-			Object entrada = JOptionPane.showInputDialog( ventana, "Elige espacio a generar:", "Creación", JOptionPane.INFORMATION_MESSAGE, null, EspacioAgenda.TIPOS_DE_ESPACIOS, "Tarea" );
-			if (entrada!=null) {
+			//Object entrada = JOptionPane.showInputDialog( ventana, "Elige color a generar:", "Creación", JOptionPane.INFORMATION_MESSAGE, null, EspacioAgenda.TIPOS_DE_COLOR, "Azul" );
+			
 				// 2.- Definir duración
-				String duracion = JOptionPane.showInputDialog( "Introduce duración en minutos: ", 60 );
-				try {
-					int dur = Integer.parseInt( duracion );
-					// 3.- Crear espacio
-					EspacioAgenda nuevo = EspacioAgenda.crearNuevoEspacio( (String)entrada, ventana, fecha, dur );
-					// 4.- Pedir resto de datos (personalizados)
-					if (nuevo instanceof Editable) {
-						((Editable)nuevo).editar();
-					}
-					anyadirEspacio( nuevo );
-				} catch (Exception e) {
-					// Error en entrada - no se genera slot
+			String duracion = JOptionPane.showInputDialog( "Introduce duración en minutos: ", 60 );
+			try {
+				int dur = Integer.parseInt( duracion );
+				// 3.- Crear espacio
+				EspacioAgenda nuevo = EspacioAgenda.crearNuevoEspacio(ventana, fecha, dur );
+				// 4.- Pedir resto de datos (personalizados)
+				if (nuevo instanceof Editable) {
+					((Editable)nuevo).editar();
 				}
+				anyadirEspacio( nuevo );
+			} catch (Exception e) {
+				// Error en entrada - no se genera slot
 			}
 		}
 	}
@@ -179,6 +183,17 @@ public class GestorAgenda {
 			((Editable) espacio).editar();
 			ventana.repaint();
 		}
+	}
+	
+	public void espacioSeleccionado(String espacio) {
+		int i = 0;
+		for(EspacioAgenda ea: listaAgenda) {
+			if(ea.toString().equals(espacio)) {
+				break;
+			}
+			i++;
+		}
+		clickEnEspacio(listaAgenda.get(i));
 	}
 	
 	public void dragEnEspacio( Movible espacioMovible, int difX, int difY ) {
