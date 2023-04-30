@@ -6,8 +6,6 @@ import javax.jdo.Query;
 import javax.jdo.JDOHelper;
 import javax.jdo.Transaction;
 
-import pojo.DirectMessage;
-import pojo.MessageData;
 import pojo.UserData;
 
 import javax.ws.rs.GET;
@@ -20,7 +18,6 @@ import javax.ws.rs.core.Response.Status;
 
 import org.apache.logging.log4j.Logger;
 
-import jdo.Message;
 import jdo.User;
 
 import org.apache.logging.log4j.LogManager;

@@ -9,8 +9,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import pojo.DirectMessage;
-import pojo.MessageData;
 import pojo.UserData;
 
 import org.apache.logging.log4j.LogManager;

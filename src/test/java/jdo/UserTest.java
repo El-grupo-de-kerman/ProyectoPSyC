@@ -1,33 +1,18 @@
-package test;
+package jdo;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class UserDataTest {
+public class UserTest {
 
 	@Test
-	public void testUserData() {
+	public void testUser() {
 		
 	}
 
 	@Test
 	public void testGetName() {
-		
-	}
-
-	@Test
-	public void testSetName() {
-		
-	}
-
-	@Test
-	public void testGetMail() {
-		
-	}
-
-	@Test
-	public void testSetMail() {
 		
 	}
 

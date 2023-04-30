@@ -1,18 +1,33 @@
-package test;
+package pojo;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class UserTest {
+public class UserDataTest {
 
 	@Test
-	public void testUser() {
+	public void testUserData() {
 		
 	}
 
 	@Test
 	public void testGetName() {
+		
+	}
+
+	@Test
+	public void testSetName() {
+		
+	}
+
+	@Test
+	public void testGetMail() {
+		
+	}
+
+	@Test
+	public void testSetMail() {
 		
 	}
 
