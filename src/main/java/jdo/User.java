@@ -42,6 +42,10 @@ public class User {
 		return this.name;
 	}
 	
+	public String getMail() {
+		return mail;
+	}
+	
 	public String getPassword() {
 		return this.password;
 	}

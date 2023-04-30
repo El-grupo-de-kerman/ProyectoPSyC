@@ -4,7 +4,6 @@ fuentes\Tarea.class
 fuentes\VentanaAgenda$3.class
 gui\LogInWindow$2.class
 main\Main.class
-pojo\MessageData.class
 fuentes\VentanaAgenda$8.class
 fuentes\CitaMedica.class
 fuentes\VentanaAgenda$4.class
@@ -12,7 +11,6 @@ fuentes\GestorAgenda.class
 pojo\UserData.class
 fuentes\EspacioAgenda.class
 fuentes\Cita.class
-pojo\DirectMessage.class
 fuentes\VentanaAgenda$6.class
 fuentes\VentanaAgenda$1.class
 server\Server.class
@@ -24,7 +22,6 @@ fuentes\VentanaAgenda.class
 fuentes\VentanaAgenda$7.class
 fuentes\VentanaAgenda$7$1.class
 fuentes\VentanaAgenda$9.class
-jdo\Message.class
 fuentes\VentanaAgenda$5.class
 fuentes\Editable.class
 gui\LogInWindow.class
