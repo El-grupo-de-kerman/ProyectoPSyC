@@ -136,9 +136,11 @@ public class EspacioAgenda extends JLabel implements Movible, Serializable, Edit
 	 */
 	public void recalculaPosicion() {
 		setLocation( ventana.getXFecha(fechaHora), ventana.getYFecha(fechaHora) );
+		/*
 		if(ventana.getFechaInicial().after(fechaHora) || ventana.getFechaFinal().before(fechaHora)) {
 			setLocation(-1000, -1000);
 		}
+		*/
 		setSize( ventana.getAnchoColumna(), ventana.getAlturaPixels( duracionMins ) );
 	}
 	
