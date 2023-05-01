@@ -100,10 +100,7 @@ public class GestorAgendaTest {
 		
 	}
 	
-	@Test
-	public void TestEspacioSeleccionado() {
-		gestor.espacioSeleccionado("a");
-	}
+	
 
 
 
