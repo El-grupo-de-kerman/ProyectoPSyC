@@ -174,7 +174,7 @@ public class EspacioAgendaTest {
 	@Test
 	public void testToString() {
 		
-		ventana.toString();
+		assertEquals(" con  {GENERAL}", espacioAgenda.toString());
 	}
 
 	@Test
