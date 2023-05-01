@@ -28,144 +28,143 @@ import org.mockito.MockitoAnnotations;
 import pojo.UserData;
 import jdo.User;
 
-
 public class ServerTest {
 
-    private Server server;
+	private Server server;
 
-    @Mock
-    private PersistenceManager persistenceManager;
+	@Mock
+	private PersistenceManager persistenceManager;
 
-    @Mock
-    private Transaction transaction;
+	@Mock
+	private Transaction transaction;
 
-    @Before
-    public void setUp() {
-        MockitoAnnotations.openMocks(this);
+	@Before
+	public void setUp() {
+		MockitoAnnotations.openMocks(this);
 
-        // initializing static mock object PersistenceManagerFactory
-        try (MockedStatic<JDOHelper> jdoHelper = Mockito.mockStatic(JDOHelper.class)) {
-            PersistenceManagerFactory pmf = mock(PersistenceManagerFactory.class);
-            jdoHelper.when(() -> JDOHelper.getPersistenceManagerFactory("datanucleus.properties")).thenReturn(pmf);
-            
-            when(pmf.getPersistenceManager()).thenReturn(persistenceManager);
-            when(persistenceManager.currentTransaction()).thenReturn(transaction);
+		// initializing static mock object PersistenceManagerFactory
+		try (MockedStatic<JDOHelper> jdoHelper = Mockito.mockStatic(JDOHelper.class)) {
+			PersistenceManagerFactory pmf = mock(PersistenceManagerFactory.class);
+			jdoHelper.when(() -> JDOHelper.getPersistenceManagerFactory("datanucleus.properties")).thenReturn(pmf);
 
-            // instantiate tested object with mock dependencies
-            server = new Server();
-        }
-    }
+			when(pmf.getPersistenceManager()).thenReturn(persistenceManager);
+			when(persistenceManager.currentTransaction()).thenReturn(transaction);
 
-    @Test
-    public void testRegisterUserNotFound() {
-        // prepare mock Persistence Manager to return User
-        UserData userData = new UserData();
-        userData.setName("test-login");
-        userData.setMail("test-login");
-        userData.setPassword("passwd");
+			// instantiate tested object with mock dependencies
+			server = new Server();
+		}
+	}
 
-        // simulate that the object is not found in the database
-        when(persistenceManager.getObjectById(any(), anyString())).thenThrow(new JDOObjectNotFoundException());
+	@Test
+	public void testRegisterUserNotFound() {
+		// prepare mock Persistence Manager to return User
+		UserData userData = new UserData();
+		userData.setName("test-login");
+		userData.setMail("test-login");
+		userData.setPassword("passwd");
 
-        // prepare mock transaction behaviour
-        when(transaction.isActive()).thenReturn(true);
+		// simulate that the object is not found in the database
+		when(persistenceManager.getObjectById(any(), anyString())).thenThrow(new JDOObjectNotFoundException());
 
-        // call tested method
-        Response response = server.registerUser(userData);
+		// prepare mock transaction behaviour
+		when(transaction.isActive()).thenReturn(true);
 
-        // check that the new user is stored in the database with the correct values
-        ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
-        verify(persistenceManager).makePersistent(userCaptor.capture());
-        assertEquals("test-login", userCaptor.getValue().getName());
-        assertEquals("test-login", userCaptor.getValue().getMail());
-        assertEquals("passwd", userCaptor.getValue().getPassword());
+		// call tested method
+		Response response = server.registerUser(userData);
 
-        // check expected response
-        assertEquals(Response.Status.OK, response.getStatusInfo());
-    }
+		// check that the new user is stored in the database with the correct values
+		ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
+		verify(persistenceManager).makePersistent(userCaptor.capture());
+		assertEquals("test-login", userCaptor.getValue().getName());
+		assertEquals("test-login", userCaptor.getValue().getMail());
+		assertEquals("passwd", userCaptor.getValue().getPassword());
 
-    @Test
-    public void testRegisterUser() {
-        // prepare mock Persistence Manager to return User
-        UserData userData = new UserData();
-        userData.setName("test-login");
-        userData.setMail("test-login");
-        userData.setPassword("passwd");
+		// check expected response
+		assertEquals(Response.Status.OK, response.getStatusInfo());
+	}
 
-        // simulate that 
-        User user = spy(User.class);
-        when(persistenceManager.getObjectById(User.class, userData.getName())).thenReturn(user);
+	@Test
+	public void testRegisterUser() {
+		// prepare mock Persistence Manager to return User
+		UserData userData = new UserData();
+		userData.setName("test-login");
+		userData.setMail("test-login");
+		userData.setPassword("passwd");
 
-        // call tested method
-        Response response = server.registerUser(userData);
-        
-        if(user != null) {
-        	assertEquals(Response.Status.INTERNAL_SERVER_ERROR, response.getStatusInfo());
-        } else {
+		// simulate that
+		User user = spy(User.class);
+		when(persistenceManager.getObjectById(User.class, userData.getName())).thenReturn(user);
 
-	        // check that the user is set by the code with the password
-	        ArgumentCaptor<String> passwordCaptor = ArgumentCaptor.forClass(String.class);
-	        verify(user).setPassword(passwordCaptor.capture());
-	        assertEquals("passwd", passwordCaptor.getValue());
-	
-	        // check expected response
-	        assertEquals(Response.Status.OK, response.getStatusInfo());
-        }
-    }
-    
-    @Test
-    public void testLoginUser() {
-    	// prepare mock Persistence Manager to return User
-        UserData userData = new UserData();
-        userData.setName("test-login");
-        userData.setMail("test-login");
-        userData.setPassword("passwd");
+		// call tested method
+		Response response = server.registerUser(userData);
 
-        // simulate that 
-        User user = spy(User.class);
-        when(persistenceManager.getObjectById(User.class, userData.getName())).thenReturn(user);
+		if (user != null) {
+			assertEquals(Response.Status.INTERNAL_SERVER_ERROR, response.getStatusInfo());
+		} else {
 
-        // call tested method
-        Response response = server.registerUser(userData);
-        
-        if(user == null) {
-        	assertEquals(Response.Status.INTERNAL_SERVER_ERROR, response.getStatusInfo());
-        } else {
-	        // check that the user is set by the code with the password
-	        ArgumentCaptor<String> passwordCaptor = ArgumentCaptor.forClass(String.class);
-	        verify(user).setPassword(passwordCaptor.capture());
-	        assertEquals("passwd", passwordCaptor.getValue());
-	
-	        // check expected response
-	        assertEquals(Response.Status.OK, response.getStatusInfo());
-        }
-    }
-    
-    @Test
-    public void testLoginUserNotFound() {
-    	// prepare mock Persistence Manager to return User
-        UserData userData = new UserData();
-        userData.setName("test-login");
-        userData.setMail("test-login");
-        userData.setPassword("passwd");
+			// check that the user is set by the code with the password
+			ArgumentCaptor<String> passwordCaptor = ArgumentCaptor.forClass(String.class);
+			verify(user).setPassword(passwordCaptor.capture());
+			assertEquals("passwd", passwordCaptor.getValue());
 
-        // simulate that the object is not found in the database
-        when(persistenceManager.getObjectById(any(), anyString())).thenThrow(new JDOObjectNotFoundException());
+			// check expected response
+			assertEquals(Response.Status.OK, response.getStatusInfo());
+		}
+	}
 
-        // prepare mock transaction behaviour
-        when(transaction.isActive()).thenReturn(true);
+	@Test
+	public void testLoginUser() {
+		// prepare mock Persistence Manager to return User
+		UserData userData = new UserData();
+		userData.setName("test-login");
+		userData.setMail("test-login");
+		userData.setPassword("passwd");
 
-        // call tested method
-        Response response = server.registerUser(userData);
+		// simulate that
+		User user = spy(User.class);
+		when(persistenceManager.getObjectById(User.class, userData.getName())).thenReturn(user);
 
-        // check that the new user is stored in the database with the correct values
-        ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
-        verify(persistenceManager).makePersistent(userCaptor.capture());
-        assertEquals("test-login", userCaptor.getValue().getName());
-        assertEquals("test-login", userCaptor.getValue().getMail());
-        assertEquals("passwd", userCaptor.getValue().getPassword());
+		// call tested method
+		Response response = server.registerUser(userData);
 
-        // check expected response
-        assertEquals(Response.Status.OK, response.getStatusInfo());
-    }
+		if (user == null) {
+			assertEquals(Response.Status.INTERNAL_SERVER_ERROR, response.getStatusInfo());
+		} else {
+			// check that the user is set by the code with the password
+			ArgumentCaptor<String> passwordCaptor = ArgumentCaptor.forClass(String.class);
+			verify(user).setPassword(passwordCaptor.capture());
+			assertEquals("passwd", passwordCaptor.getValue());
+
+			// check expected response
+			assertEquals(Response.Status.OK, response.getStatusInfo());
+		}
+	}
+
+	@Test
+	public void testLoginUserNotFound() {
+		// prepare mock Persistence Manager to return User
+		UserData userData = new UserData();
+		userData.setName("test-login");
+		userData.setMail("test-login");
+		userData.setPassword("passwd");
+
+		// simulate that the object is not found in the database
+		when(persistenceManager.getObjectById(any(), anyString())).thenThrow(new JDOObjectNotFoundException());
+
+		// prepare mock transaction behaviour
+		when(transaction.isActive()).thenReturn(true);
+
+		// call tested method
+		Response response = server.registerUser(userData);
+
+		// check that the new user is stored in the database with the correct values
+		ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
+		verify(persistenceManager).makePersistent(userCaptor.capture());
+		assertEquals("test-login", userCaptor.getValue().getName());
+		assertEquals("test-login", userCaptor.getValue().getMail());
+		assertEquals("passwd", userCaptor.getValue().getPassword());
+
+		// check expected response
+		assertEquals(Response.Status.OK, response.getStatusInfo());
+	}
 }

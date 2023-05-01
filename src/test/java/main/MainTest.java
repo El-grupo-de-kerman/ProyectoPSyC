@@ -26,80 +26,80 @@ import main.Main;
 import pojo.UserData;
 
 public class MainTest {
-	
+
 	@Mock
-    private Client client;
+	private Client client;
 
-    @Mock(answer=Answers.RETURNS_DEEP_STUBS)
-    private WebTarget webTarget;
+	@Mock(answer = Answers.RETURNS_DEEP_STUBS)
+	private WebTarget webTarget;
 
-    @Captor
-    private ArgumentCaptor<Entity<UserData>> userDataEntityCaptor;
+	@Captor
+	private ArgumentCaptor<Entity<UserData>> userDataEntityCaptor;
 
-    private Main main;
+	private Main main;
 
-    @Before
-    public void setUp() {
-        MockitoAnnotations.openMocks(this);
+	@Before
+	public void setUp() {
+		MockitoAnnotations.openMocks(this);
 
-        // prepare static mock of ClientBuilder
-        try (MockedStatic<ClientBuilder> clientBuilder = Mockito.mockStatic(ClientBuilder.class)) {
-            clientBuilder.when(ClientBuilder::newClient).thenReturn(client);
-            when(client.target("http://localhost:8080/rest/resource")).thenReturn(webTarget);
+		// prepare static mock of ClientBuilder
+		try (MockedStatic<ClientBuilder> clientBuilder = Mockito.mockStatic(ClientBuilder.class)) {
+			clientBuilder.when(ClientBuilder::newClient).thenReturn(client);
+			when(client.target("http://localhost:8080/rest/resource")).thenReturn(webTarget);
 
-            main = new Main("localhost", "8080");
-        }
-    }
+			main = new Main("localhost", "8080");
+		}
+	}
 
 	@Test
 	public void testRegisterUser() {
-		 when(webTarget.path("register")).thenReturn(webTarget);
-		 
-		 Response response = Response.ok().build();
-		 when(webTarget.request(MediaType.APPLICATION_JSON).post(any(Entity.class))).thenReturn(response);
-		 
-		 verify(webTarget.request(MediaType.APPLICATION_JSON)).post(userDataEntityCaptor.capture());
-		 assertEquals("test-login", userDataEntityCaptor.getValue().getEntity().getName());
-		 assertEquals("test-login", userDataEntityCaptor.getValue().getEntity().getMail());
-		 assertEquals("passwd", userDataEntityCaptor.getValue().getEntity().getPassword());
-	}
-	
-	@Test
-    public void testRegisterUserWithError() {
 		when(webTarget.path("register")).thenReturn(webTarget);
 
-        Response response = Response.serverError().build();
-        when(webTarget.request(MediaType.APPLICATION_JSON).post(any(Entity.class))).thenReturn(response);
-       
-        verify(webTarget.request(MediaType.APPLICATION_JSON)).post(userDataEntityCaptor.capture());
-        assertEquals("test-login", userDataEntityCaptor.getValue().getEntity().getName());
-        assertEquals("test-login", userDataEntityCaptor.getValue().getEntity().getMail());
-        assertEquals("passwd", userDataEntityCaptor.getValue().getEntity().getPassword());
-    }
-	
+		Response response = Response.ok().build();
+		when(webTarget.request(MediaType.APPLICATION_JSON).post(any(Entity.class))).thenReturn(response);
+
+		verify(webTarget.request(MediaType.APPLICATION_JSON)).post(userDataEntityCaptor.capture());
+		assertEquals("test-login", userDataEntityCaptor.getValue().getEntity().getName());
+		assertEquals("test-login", userDataEntityCaptor.getValue().getEntity().getMail());
+		assertEquals("passwd", userDataEntityCaptor.getValue().getEntity().getPassword());
+	}
+
+	@Test
+	public void testRegisterUserWithError() {
+		when(webTarget.path("register")).thenReturn(webTarget);
+
+		Response response = Response.serverError().build();
+		when(webTarget.request(MediaType.APPLICATION_JSON).post(any(Entity.class))).thenReturn(response);
+
+		verify(webTarget.request(MediaType.APPLICATION_JSON)).post(userDataEntityCaptor.capture());
+		assertEquals("test-login", userDataEntityCaptor.getValue().getEntity().getName());
+		assertEquals("test-login", userDataEntityCaptor.getValue().getEntity().getMail());
+		assertEquals("passwd", userDataEntityCaptor.getValue().getEntity().getPassword());
+	}
+
 	@Test
 	public void testLogUser() {
-		 when(webTarget.path("login")).thenReturn(webTarget);
-		 
-		 Response response = Response.ok().build();
-		 when(webTarget.request(MediaType.APPLICATION_JSON).post(any(Entity.class))).thenReturn(response);
-		 
-		 verify(webTarget.request(MediaType.APPLICATION_JSON)).post(userDataEntityCaptor.capture());
-		 assertEquals("test-login", userDataEntityCaptor.getValue().getEntity().getName());
-		 assertEquals("test-login", userDataEntityCaptor.getValue().getEntity().getMail());
-		 assertEquals("passwd", userDataEntityCaptor.getValue().getEntity().getPassword());
-	}
-	
-	@Test
-    public void testLogUserWithError() {
 		when(webTarget.path("login")).thenReturn(webTarget);
 
-        Response response = Response.serverError().build();
-        when(webTarget.request(MediaType.APPLICATION_JSON).post(any(Entity.class))).thenReturn(response);
-       
-        verify(webTarget.request(MediaType.APPLICATION_JSON)).post(userDataEntityCaptor.capture());
-        assertEquals("test-login", userDataEntityCaptor.getValue().getEntity().getName());
-        assertEquals("test-login", userDataEntityCaptor.getValue().getEntity().getMail());
-        assertEquals("passwd", userDataEntityCaptor.getValue().getEntity().getPassword());
-    }
+		Response response = Response.ok().build();
+		when(webTarget.request(MediaType.APPLICATION_JSON).post(any(Entity.class))).thenReturn(response);
+
+		verify(webTarget.request(MediaType.APPLICATION_JSON)).post(userDataEntityCaptor.capture());
+		assertEquals("test-login", userDataEntityCaptor.getValue().getEntity().getName());
+		assertEquals("test-login", userDataEntityCaptor.getValue().getEntity().getMail());
+		assertEquals("passwd", userDataEntityCaptor.getValue().getEntity().getPassword());
+	}
+
+	@Test
+	public void testLogUserWithError() {
+		when(webTarget.path("login")).thenReturn(webTarget);
+
+		Response response = Response.serverError().build();
+		when(webTarget.request(MediaType.APPLICATION_JSON).post(any(Entity.class))).thenReturn(response);
+
+		verify(webTarget.request(MediaType.APPLICATION_JSON)).post(userDataEntityCaptor.capture());
+		assertEquals("test-login", userDataEntityCaptor.getValue().getEntity().getName());
+		assertEquals("test-login", userDataEntityCaptor.getValue().getEntity().getMail());
+		assertEquals("passwd", userDataEntityCaptor.getValue().getEntity().getPassword());
+	}
 }

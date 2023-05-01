@@ -18,7 +18,6 @@ import fuentes.VentanaAgenda;
 
 public class GestorAgendaTest {
 
-
 	private GestorAgenda gestor;
 	private VentanaAgenda ventana;
 	private EspacioAgenda espacioAgenda;
@@ -28,37 +27,31 @@ public class GestorAgendaTest {
 	Date fechaHoraMock;
 	@Mock
 	Color colorFondoMock;
-	
 
-	
 	@Before
 	public void setUp() {
 		MockitoAnnotations.openMocks(this);
-		
-		gestor = new GestorAgenda();
-		ventana = new VentanaAgenda( 100, 100 , gestor);
- // Creamos una ventana para el espacio
-	     
-	    
-	    // Creamos un objeto Date para la fecha
-	     fecha = new Date(0);
-	    
-	    // Duración de 60 minutos
-	    int duracion = 60;
-	    
-	    // Creamos un espacio de tipo "Tarea"
-	   espacioAgenda = EspacioAgenda.crearNuevoEspacio(ventana, fecha, duracion);
-		 
-		  }
 
-	
+		gestor = new GestorAgenda();
+		ventana = new VentanaAgenda(100, 100, gestor);
+		// Creamos una ventana para el espacio
+
+		// Creamos un objeto Date para la fecha
+		fecha = new Date(0);
+
+		// Duración de 60 minutos
+		int duracion = 60;
+
+		// Creamos un espacio de tipo "Tarea"
+		espacioAgenda = EspacioAgenda.crearNuevoEspacio(ventana, fecha, duracion);
+
+	}
+
 	@Test
 	public void testGetVentana() {
 		VentanaAgenda vent = gestor.getVentana();
 		assertEquals(vent, gestor.getVentana());
 	}
-	
-
 
 	@Test
 	public void testGetListaAgenda() {
@@ -74,35 +67,33 @@ public class GestorAgendaTest {
 	@Test
 	public void testLogin() {
 		gestor.login();
-	
+
 	}
 
 	@Test
 	public void testAnyadirEspacio() {
 		gestor.anyadirEspacio(espacioAgenda);
-		
+
 	}
 
 	@Test
 	public void testReiniciaVentanaDeAgenda() {
 		gestor.reiniciaVentanaDeAgenda();
-		
+
 	}
+
 	@Test
 	public void testRecolocaEspacioEnSuOrigen() {
 		gestor.recolocaEspacioEnSuOrigen(espacioAgenda);
-		
+
 	}
+
 	@Test
 	public void testBorrarAgendaActual() {
 		gestor.borrarAgendaActual(false);
 		gestor.borrarAgendaActual(true);
-		
+
 	}
-	
-	
-
-
 
 	@Test
 	public void testClickEnEspacio() {
@@ -111,13 +102,13 @@ public class GestorAgendaTest {
 
 	@Test
 	public void testDragEnEspacio() {
-		gestor.dragEnEspacio(espacioAgenda,20,20);
+		gestor.dragEnEspacio(espacioAgenda, 20, 20);
 	}
 
 	@Test
 	public void testFinDragEnEspacio() {
 		Point p = new Point();
-	
+
 	}
 
 }

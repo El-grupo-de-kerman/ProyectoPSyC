@@ -10,14 +10,14 @@ import pojo.UserData;
 public class UserDataTest {
 
 	UserData userData;
-	
+
 	@Before
-    public void setUp() {
-        userData = new UserData();
-        userData.setName("test-login");
-        userData.setMail("test-login");
-        userData.setPassword("passwd");
-    }
+	public void setUp() {
+		userData = new UserData();
+		userData.setName("test-login");
+		userData.setMail("test-login");
+		userData.setPassword("passwd");
+	}
 
 	@Test
 	public void testGetName() {
@@ -27,7 +27,7 @@ public class UserDataTest {
 	@Test
 	public void testSetName() {
 		userData.setName("newtest-login");
-        assertEquals("newtest-login", userData.getName());
+		assertEquals("newtest-login", userData.getName());
 	}
 
 	@Test
@@ -38,7 +38,7 @@ public class UserDataTest {
 	@Test
 	public void testSetMail() {
 		userData.setMail("newtest-login");
-        assertEquals("newtest-login", userData.getMail());
+		assertEquals("newtest-login", userData.getMail());
 	}
 
 	@Test
@@ -49,7 +49,7 @@ public class UserDataTest {
 	@Test
 	public void testSetPassword() {
 		userData.setPassword("newpasswd");
-        assertEquals("newpasswd", userData.getPassword());
+		assertEquals("newpasswd", userData.getPassword());
 	}
 
 	@Test

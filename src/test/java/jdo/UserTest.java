@@ -8,19 +8,19 @@ import org.junit.Test;
 import jdo.User;
 
 public class UserTest {
-	
+
 	private User user;
-	
+
 	@Before
-    public void setUp() {
-        user = new User("test-login", "test-login", "passwd");
-    }
+	public void setUp() {
+		user = new User("test-login", "test-login", "passwd");
+	}
 
 	@Test
 	public void testGetName() {
 		assertEquals("test-login", user.getName());
 	}
-	
+
 	@Test
 	public void testGetMail() {
 		assertEquals("test-login", user.getMail());
@@ -34,7 +34,7 @@ public class UserTest {
 	@Test
 	public void testSetPassword() {
 		user.setPassword("newpasswd");
-        assertEquals("newpasswd", user.getPassword());
+		assertEquals("newpasswd", user.getPassword());
 	}
 
 	@Test

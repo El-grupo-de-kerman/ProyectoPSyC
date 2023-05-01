@@ -10,6 +10,6 @@ public class LogInWindowTest {
 
 	@Test
 	public void testLogInWindow() {
-		 LogInWindow loginWindow = new LogInWindow(null);    
+		LogInWindow loginWindow = new LogInWindow(null);
 	}
 }
