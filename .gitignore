@@ -1,7 +1,7 @@
-.metadata/
-.classpath/
-.project/
-datanucleus.log/
-target/
-.settings/
+*.metadata/
+*.classpath
+*.project
+*datanucleus.log/
+*target/
+*.settings/
 
