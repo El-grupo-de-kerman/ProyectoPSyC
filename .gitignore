@@ -3,4 +3,5 @@
 .project/
 datanucleus.log/
 target/
+.settings/
 
