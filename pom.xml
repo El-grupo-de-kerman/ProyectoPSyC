@@ -19,6 +19,7 @@
 		<server.port>8080</server.port>
 		<sonar.organization>nikopm</sonar.organization>
   		<sonar.host.url>https://sonarcloud.io</sonar.host.url>  <!-- Sonar cloud -->
+  		<doxygen.config.file>${basedir}/src/main/resources/Doxyfile</doxygen.config.file>
 	</properties>
 
 	<dependencyManagement>
@@ -198,6 +199,16 @@
 					<nohelp>true</nohelp>
 				</configuration>
 			</plugin>
+			
+			 <plugin>
+ 				<groupId>com.soebes.maven.plugins</groupId>
+				<artifactId>doxygen-maven-plugin</artifactId>
+				<version>1.1.0</version>
+				<configuration>
+ 					<configurationFile>${doxygen.config.file}</configurationFile>
+				</configuration>
+ 			</plugin>
+			
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
@@ -219,6 +230,7 @@
 			</plugin>
 		</plugins>
 	</build>
+
 
 	<profiles>
 		<profile>
