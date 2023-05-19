@@ -160,9 +160,6 @@
 					<execution>
 						<!-- links the enhance to the compile phase -->
 						<phase>compile</phase>
-						<goals>
-							<goal>enhance</goal>
-						</goals>
 					</execution>
 				</executions>
 			</plugin>
