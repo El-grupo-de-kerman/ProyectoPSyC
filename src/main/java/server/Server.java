@@ -31,7 +31,12 @@ public class Server {
 	//private int cont = 0;
 	private PersistenceManager pm = null;
 	private Transaction tx = null;
-
+	
+	
+	/**
+	 * @brief Constructor de servidor
+	 * @details Inicializa el PersistenceManager y CurrenTransaction
+	 */
 	public Server() {
 		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 		this.pm = pmf.getPersistenceManager();
@@ -79,6 +84,12 @@ public class Server {
 	}
 	*/
 	
+	/**
+	 * @brief Metodo de registrar el usuario
+	 * @details Registra el usuario en la base de datos y si ya esta registrado salta un error.
+	 * @param userData
+	 * @return Devuelve la respuesta de que se ha registrado correctamente o incorrectamente.
+	 */
 	@POST
 	@Path("/register")
 	public Response registerUser(UserData userData) {
@@ -114,6 +125,12 @@ public class Server {
 		}
 	}
 	
+	/**
+	 * @brief Metodo de hacer login el usuario
+	 * @details Hace login del usuario en la base de datos.
+	 * @param userData
+	 * @return Devuelve la respuesta de que se ha hecho login correctamente o incorrectamente.
+	 */
 	@POST
 	@Path("/login")
 	public Response loginUser(UserData userData) {
