@@ -33,6 +33,7 @@ public class VentanaAgenda extends JFrame {
 	private JButton bIzq;          
 	private JButton bDer;  
 	private JButton bUser;
+	private JButton bJump;
 	private JPanel pAgenda;       
 	private JLabel lMensaje;        
 	private int inicioXAgenda;     
@@ -73,11 +74,13 @@ public class VentanaAgenda extends JFrame {
 			bDer = new JButton( new ImageIcon("src/main/java/fuentes/img/flechaDcha.png"));
 			bTrash = new JButton( new ImageIcon("src/main/java/fuentes/img/trash.png"));
 			bUser = new JButton( new ImageIcon("src/main/java/fuentes/img/user.png"));
+			bJump = new JButton( new ImageIcon("src/main/java/fuentes/img/texto.png"));
 		} catch (Exception e1) {  // Si hay error, botones texto
 			bIzq = new JButton( "Antes" );
 			bDer = new JButton( "Después" );
 			bTrash = new JButton( "Borrar" );
 			bUser = new JButton("Eventos");
+			bJump = new JButton("Ir a fecha");
 		}
 		
 		lMensaje.setFont( TIPO_MENSAJE );
@@ -87,6 +90,7 @@ public class VentanaAgenda extends JFrame {
 		pIzquierda.add( bIzq );
 		pIzquierda.add( bDer );
 		pIzquierda.add(bUser);
+		pIzquierda.add(bJump);
 		pIzquierda.add( bTrash );
 		getContentPane().add( pIzquierda, BorderLayout.WEST );
 		pSuperior.add( lMensaje );
@@ -142,6 +146,44 @@ public class VentanaAgenda extends JFrame {
 				if(entrada != null) {
 					gestor.espacioSeleccionado(String.valueOf(entrada));
 				}
+			}
+		});
+		bJump.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String dia;
+					while(true) {
+						dia = JOptionPane.showInputDialog(VentanaAgenda.this, "Día", "Elige el día (1 - 31)", JOptionPane.INFORMATION_MESSAGE);
+						if(Integer.parseInt(dia) < 1 || Integer.parseInt(dia) > 31) {
+							JOptionPane.showMessageDialog(VentanaAgenda.this, "Día Incorrecto", "ERROR", JOptionPane.ERROR_MESSAGE);
+							continue;
+						}
+						break;
+					}
+					String mes;
+					while(true) {
+						mes = JOptionPane.showInputDialog(VentanaAgenda.this, "Mes", "Elige el mes (1 - 12)", JOptionPane.INFORMATION_MESSAGE);
+						if(Integer.parseInt(mes) < 1 || Integer.parseInt(mes) > 12) {
+							JOptionPane.showMessageDialog(VentanaAgenda.this, "Mes Incorrecto", "ERROR", JOptionPane.ERROR_MESSAGE);
+							continue;
+						}
+						break;
+					}
+					String anyo;
+					while(true) {
+						anyo = JOptionPane.showInputDialog(VentanaAgenda.this, "Año", "Elige el año (1940 - 2200)", JOptionPane.INFORMATION_MESSAGE);
+						if(Integer.parseInt(anyo) < 1940 || Integer.parseInt(anyo) > 2200) {
+							JOptionPane.showMessageDialog(VentanaAgenda.this, "Año Incorrecto", "ERROR", JOptionPane.ERROR_MESSAGE);
+							continue;
+						}
+						break;
+					}
+					Date date = new Date(Integer.parseInt(anyo) - 1900, Integer.parseInt(mes) - 1, Integer.parseInt(dia));
+					fechaInicial = date;
+					recalculaPosiciones();
+					repaint();
+				} catch (Exception ex) {}
 			}
 		});
 		bTrash.addActionListener( new ActionListener() {
