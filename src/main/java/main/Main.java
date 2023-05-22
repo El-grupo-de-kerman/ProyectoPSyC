@@ -30,8 +30,8 @@ public class Main {
 
 	
 	/**
-	 * @brief 
-	 * @details 
+	 * @brief Constructor de la clase main
+	 * @details Establece la conexion con el servidor
 	 * @param hostname
 	 * @param port
 	 */

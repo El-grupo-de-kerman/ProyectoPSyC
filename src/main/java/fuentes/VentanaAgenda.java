@@ -155,7 +155,7 @@ public class VentanaAgenda extends JFrame {
 					String dia;
 					while(true) {
 						dia = JOptionPane.showInputDialog(VentanaAgenda.this, "Día", "Elige el día (1 - 31)", JOptionPane.INFORMATION_MESSAGE);
-						if(Integer.parseInt(dia) < 1 || Integer.parseInt(dia) > 31) {
+						if(Integer.parseInt(dia) < 1 || Integer.parseInt(dia) > 31 || dia == null) {
 							JOptionPane.showMessageDialog(VentanaAgenda.this, "Día Incorrecto", "ERROR", JOptionPane.ERROR_MESSAGE);
 							continue;
 						}
@@ -164,7 +164,7 @@ public class VentanaAgenda extends JFrame {
 					String mes;
 					while(true) {
 						mes = JOptionPane.showInputDialog(VentanaAgenda.this, "Mes", "Elige el mes (1 - 12)", JOptionPane.INFORMATION_MESSAGE);
-						if(Integer.parseInt(mes) < 1 || Integer.parseInt(mes) > 12) {
+						if(Integer.parseInt(mes) < 1 || Integer.parseInt(mes) > 12 || mes == null) {
 							JOptionPane.showMessageDialog(VentanaAgenda.this, "Mes Incorrecto", "ERROR", JOptionPane.ERROR_MESSAGE);
 							continue;
 						}
@@ -173,7 +173,7 @@ public class VentanaAgenda extends JFrame {
 					String anyo;
 					while(true) {
 						anyo = JOptionPane.showInputDialog(VentanaAgenda.this, "Año", "Elige el año (1940 - 2200)", JOptionPane.INFORMATION_MESSAGE);
-						if(Integer.parseInt(anyo) < 1940 || Integer.parseInt(anyo) > 2200) {
+						if(Integer.parseInt(anyo) < 1940 || Integer.parseInt(anyo) > 2200 || anyo == null) {
 							JOptionPane.showMessageDialog(VentanaAgenda.this, "Año Incorrecto", "ERROR", JOptionPane.ERROR_MESSAGE);
 							continue;
 						}
