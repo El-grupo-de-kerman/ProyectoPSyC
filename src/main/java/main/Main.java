@@ -28,11 +28,25 @@ public class Main {
 	private Client client;
 	private WebTarget webTarget;
 
+	
+	/**
+	 * @brief 
+	 * @details 
+	 * @param hostname
+	 * @param port
+	 */
 	public Main(String hostname, String port) {
 		client = ClientBuilder.newClient();
 		webTarget = client.target(String.format("http://%s:%s/rest/server", hostname, port));
 	}
 
+	/**
+	 * @brief Metodo para registrar un usuario
+	 * @details El metodo registra un usuario con su nombre, mail y password
+	 * @param name
+	 * @param mail
+	 * @param password
+	 */
 	public void registerUser(String name, String mail, String password) {
 		WebTarget registerUserWebTarget = webTarget.path("register");
 		Invocation.Builder invocationBuilder = registerUserWebTarget.request(MediaType.APPLICATION_JSON);
@@ -49,6 +63,12 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * @brief Metodo para hacer log con un usuaio
+	 * @details Con un usuario prevamente registrado se hace log con su nombre y password
+	 * @param name
+	 * @param password
+	 */
 	public void logUser(String name, String password) {
 		WebTarget registerUserWebTarget = webTarget.path("login");
 		Invocation.Builder invocationBuilder = registerUserWebTarget.request(MediaType.APPLICATION_JSON);
@@ -92,6 +112,10 @@ public class Main {
 	}
 	*/
 
+	/**
+	 * @brief Metodo del main para hacer funcionar el programa
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		if (args.length != 2) {
 			logger.info("Use: java Client.Client [host] [port]");
